@@ -7,7 +7,7 @@ const ownersRoutes = require('./routes/ownersRoutes')
 const usersRoutes = require('./routes/userRoutes')
 const productRoutes = require('./routes/productRouters')
 
-app.set('views engine','ejs')
+app.set('view engine','ejs')
 
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.json())
@@ -18,7 +18,7 @@ app.use('/owner',ownersRoutes)
 app.use('/user',usersRoutes)
 app.use('/product',productRoutes)
 app.get('/',(req,res)=>{
-    res.send("hey")
+    res.render('index',{error:""})
 })
 
 app.listen(3000)

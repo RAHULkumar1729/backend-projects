@@ -15,7 +15,7 @@ const loginSchema = Joi.object({
 module.exports.registerUser = async function (req,res){
     try{
         let {error} = registerSchema.validate(req.body)
-        if(error) return res.status(400).json({message:error.details[0].message})
+        if(error) return res.flash("user already exist")
         
         let {fullname, email, password} = req.body;
 
@@ -69,9 +69,7 @@ module.exports.loginUser = async function(req,res){
                   secure: process.env.NODE_ENV === "production", // use HTTPS in production
                   maxAge: 24 * 60 * 60 * 1000, // 1 day
             });
-            res.status(201).json({
-                message:"user can login successfully"
-            })
+            res.redirect('/shop')
           } else {
             res.status(404).send(err);  
           }
